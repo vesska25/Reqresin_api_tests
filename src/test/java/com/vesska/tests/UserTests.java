@@ -29,6 +29,7 @@ public class UserTests {
         assertEquals(response.getJob(), "leader");
     }
     @Test
+    @DisplayName("Update User job test")
     void updateUserJobTest() {
 
         CreateUser data = new CreateUser();

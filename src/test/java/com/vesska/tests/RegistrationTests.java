@@ -31,7 +31,7 @@ public class RegistrationTests {
     }
 
     @Test
-    @DisplayName("Registration test with valid data")
+    @DisplayName("Registration test without password")
     void registrationTestWithoutPassword() {
         UserBody data = new UserBody();
         data.setEmail("eve.holt@reqres.in");
@@ -48,7 +48,7 @@ public class RegistrationTests {
     }
 
     @Test
-    @DisplayName("Registration test with valid data")
+    @DisplayName("Registration test without email")
     void registrationTestWithoutEmail() {
         UserBody data = new UserBody();
         data.setEmail("");
