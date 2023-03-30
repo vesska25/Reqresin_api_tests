@@ -1,11 +1,11 @@
 package com.vesska.tests;
 
 import com.vesska.models.UserBody;
-import com.vesska.models.RegistrationUserError;
 import com.vesska.models.RegistrationUserResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.Matchers.is;
 import static com.vesska.specs.Specs.*;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,14 +37,13 @@ public class RegistrationTests {
         data.setEmail("eve.holt@reqres.in");
         data.setPassword("");
 
-        RegistrationUserError response = given(requestSpec)
+        given(requestSpec)
                 .body(data)
                 .when()
                 .post("/register")
                 .then()
                 .spec(unsuccessfulRegistrationResponseSpec)
-                .extract().as(RegistrationUserError.class);
-        assertEquals(response.getError(), "Missing password");
+                .body("error", is("Missing password"));
     }
 
     @Test
@@ -54,14 +53,14 @@ public class RegistrationTests {
         data.setEmail("");
         data.setPassword("pistol");
 
-        RegistrationUserError response = given(requestSpec)
+        given(requestSpec)
                 .body(data)
                 .when()
                 .post("/register")
                 .then()
                 .spec(unsuccessfulRegistrationResponseSpec)
-                .extract().as(RegistrationUserError.class);
-        assertEquals(response.getError(), "Missing email or username");
+                .body("error", is("Missing email or username"));
+
     }
 
 
